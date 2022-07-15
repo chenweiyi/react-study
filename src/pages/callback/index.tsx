@@ -2,7 +2,7 @@
  * @Author: 陈潍溢
  * @Date: 2022-07-15 10:44:56
  * @LastEditors: 陈潍溢
- * @LastEditTime: 2022-07-15 11:47:12
+ * @LastEditTime: 2022-07-15 11:57:41
  * @Description:
  */
 import { memo, useCallback, useMemo, useState } from 'react'
@@ -22,14 +22,14 @@ function App () {
   console.log('render parent')
 
   function onClick () {
-    setObj(obj)
-    // setObj({ ...obj })
+    // setObj(obj)
+    setObj({ ...obj })
   }
 
   return (
     <div className='App'>
       <button onClick={onClick}>点我</button>
-      <Child num={obj.num} onClick={onClick}></Child>
+      <Child num={obj.num} onClick={() => onClick}></Child>
     </div>
   )
 }
