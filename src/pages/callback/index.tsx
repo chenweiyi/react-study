@@ -2,7 +2,7 @@
  * @Author: 陈潍溢
  * @Date: 2022-07-15 10:44:56
  * @LastEditors: 陈潍溢
- * @LastEditTime: 2022-07-15 11:57:41
+ * @LastEditTime: 2022-07-15 12:50:38
  * @Description:
  */
 import { memo, useCallback, useMemo, useState } from 'react'
@@ -17,6 +17,8 @@ function Child (props: ChildProps) {
   return <div onClick={props.onClick}>{props.num}</div>
 }
 
+const ChildMemo = memo(Child)
+
 function App () {
   const [obj, setObj] = useState({ num: 1 })
   console.log('render parent')
@@ -26,10 +28,14 @@ function App () {
     setObj({ ...obj })
   }
 
+  const clickHandler = useCallback(() => {
+    setObj({ ...obj })
+  }, [])
+
   return (
     <div className='App'>
       <button onClick={onClick}>点我</button>
-      <Child num={obj.num} onClick={() => onClick}></Child>
+      <ChildMemo num={obj.num} onClick={clickHandler}></ChildMemo>
     </div>
   )
 }
