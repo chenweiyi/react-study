@@ -2,37 +2,39 @@
  * @Author: 陈潍溢
  * @Date: 2022-07-18 11:12:28
  * @LastEditors: 陈潍溢
- * @LastEditTime: 2022-07-18 13:42:17
+ * @LastEditTime: 2022-07-18 15:25:58
  * @Description:
  */
 import { Dispatch, memo, SetStateAction, useReducer, useState } from 'react'
 
-const ChildWithState = (props: {
-  change: Dispatch<SetStateAction<number>>
-}) => {
-  console.log('render child with State')
-  return (
-    <div>
-      <span>child with state</span>
-      <button onClick={() => props.change(prev => prev + 1)}>+1</button>
-    </div>
-  )
-}
+const ChildWithState = memo(
+  (props: { change: Dispatch<SetStateAction<number>> }) => {
+    console.log('render child with State')
+    return (
+      <div>
+        <span>child with state</span>
+        <button onClick={() => props.change(prev => prev + 1)}>+1</button>
+      </div>
+    )
+  },
+)
 
-const ChildWithReducer = (props: {
-  change: Dispatch<{
-    type: 'increment' | 'decrement'
-  }>
-}) => {
-  console.log('render child with reducer')
-  return (
-    <div>
-      <span>child with reducer</span>
-      <button onClick={() => props.change({ type: 'increment' })}>+1</button>
-      <button onClick={() => props.change({ type: 'decrement' })}>-1</button>
-    </div>
-  )
-}
+const ChildWithReducer = memo(
+  (props: {
+    change: Dispatch<{
+      type: 'increment' | 'decrement'
+    }>
+  }) => {
+    console.log('render child with reducer')
+    return (
+      <div>
+        <span>child with reducer</span>
+        <button onClick={() => props.change({ type: 'increment' })}>+1</button>
+        <button onClick={() => props.change({ type: 'decrement' })}>-1</button>
+      </div>
+    )
+  },
+)
 
 const reducer = (
   state: { count: number },
